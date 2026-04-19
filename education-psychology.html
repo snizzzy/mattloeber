@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Psychology — $NIPER Education</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --grey: #e5e9eb; --black: #000; --white: #fff;
+      --red: #ea4c89; --lightgray: #eff2f3; --grey-light: #787878;
+      --accent: #ea4c89;
+      --pad: 3.75rem; --radius: 2rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--grey); color: var(--black); font-family: 'Inter', sans-serif; font-size: 1rem; line-height: 1.5; -webkit-font-smoothing: antialiased; letter-spacing: -0.01rem; }
+    h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.1; letter-spacing: -0.03em; }
+    a { text-decoration: none; color: inherit; }
+    ::selection { background: #d0d5d8; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--grey); padding: 1.25rem var(--pad); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; }
+    .nav-logo img { height: 32px; width: 32px; border-radius: 50%; object-fit: cover; }
+    .nav-logo-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; color: var(--black); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links > a { font-size: 0.875rem; font-weight: 500; color: var(--black); opacity: 0.5; transition: opacity 0.2s; }
+    .nav-links > a:hover { opacity: 1; }
+    .btn-dark { background: var(--black); color: var(--white); padding: 0.7rem 1.5rem; border-radius: 100px; font-size: 0.875rem; font-weight: 600; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+    .btn-dark:hover { transform: scale(0.97); }
+
+    .nav-dropdown { position: relative; display: flex; align-items: center; }
+    .nav-dropdown-trigger { background: none; border: none; padding: 0; display: flex; align-items: center; gap: 0.3rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 500; color: var(--black); opacity: 1; cursor: pointer; }
+    .nav-dropdown-menu { position: absolute; top: calc(100% + 0.9rem); left: 50%; transform: translateX(-50%) translateY(-8px); background: #fff; border-radius: 14px; padding: 0.4rem; box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06); min-width: 200px; opacity: 0; pointer-events: none; transition: opacity 0.18s, transform 0.22s cubic-bezier(0.22,1,0.36,1); z-index: 200; border: 1px solid rgba(0,0,0,0.07); }
+    .nav-dropdown-menu::before { content: ''; position: absolute; top: -0.95rem; left: 0; right: 0; height: 0.95rem; }
+    .nav-dropdown:hover .nav-dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-menu a { display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.85rem; border-radius: 9px; font-size: 0.85rem; font-weight: 500; color: #000 !important; opacity: 1 !important; transition: background 0.15s; }
+    .nav-dropdown-menu a:hover { background: var(--lightgray); }
+    .nav-dropdown-menu a.active-item { background: var(--lightgray); }
+
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey-light); }
+
+    .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .video-card { background: var(--black); border-radius: 1.5rem; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); cursor: pointer; }
+    .video-card:hover { transform: translateY(-4px); }
+    .thumb-wrap { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+    .thumb-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); display: block; }
+    .video-card:hover .thumb-img { transform: scale(1.04); }
+    .thumb-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%, transparent 100%); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s; }
+    .video-card:hover .thumb-overlay { opacity: 1; }
+    .play-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(234,76,137,0.5); transform: scale(0.85); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+    .video-card:hover .play-icon { transform: scale(1); }
+    .card-body { padding: 1.4rem 1.6rem 1.6rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .cat-pill { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.75rem; border-radius: 100px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; background: rgba(234,76,137,0.15); color: var(--accent); align-self: flex-start; }
+    .card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.2; }
+    .card-sub { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+    .edu-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .edu-tab { padding: 0.55rem 1.1rem; border-radius: 100px; font-size: 0.82rem; font-weight: 600; border: 1px solid rgba(0,0,0,0.12); color: var(--grey-light); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .edu-tab:hover { border-color: var(--black); color: var(--black); }
+    .edu-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    @media (max-width: 767px) {
+      :root { --pad: 1.25rem; }
+      .video-grid { grid-template-columns: 1fr; }
+      .hide-mobile { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="brand_assets/Logo.jpg" alt="$NIPER logo" />
+    <span class="nav-logo-text">$NIPER</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger" style="opacity:0.5;">
+        Services
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://whop.com/forevertradingcircle/forevertradingcircle/" target="_blank" rel="noopener"><span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;flex-shrink:0;"></span>Live Trading</a>
+        <a href="indicator.html"><span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0;"></span>Indicator</a>
+      </div>
+    </div>
+    <a href="prop-firms.html">Prop Firms</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">
+        Education
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="education-beginner.html"><span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;flex-shrink:0;"></span>Beginner</a>
+        <a href="education-strategy.html"><span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0;"></span>Strategy</a>
+        <a href="education-breakdowns.html"><span style="width:7px;height:7px;border-radius:50%;background:#6366f1;display:inline-block;flex-shrink:0;"></span>Trade Breakdowns</a>
+        <a href="education-psychology.html" class="active-item"><span style="width:7px;height:7px;border-radius:50%;background:#ea4c89;display:inline-block;flex-shrink:0;"></span>Psychology</a>
+      </div>
+    </div>
+    <a href="index.html#contact" class="btn-dark hide-mobile">Connect →</a>
+  </div>
+</nav>
+
+<section style="padding: 4.5rem var(--pad) 3rem;">
+  <div style="max-width: 1360px; margin: 0 auto;">
+    <div class="badge" style="margin-bottom: 1.25rem;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
+      / Education
+    </div>
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+      <div>
+        <h1 style="font-size: clamp(2.2rem, 3.8vw, 3.5rem); font-weight: 800; color: var(--black); margin-bottom: 0.75rem;">Psychology</h1>
+        <p style="font-size: 1rem; line-height: 1.7; color: var(--grey-light); max-width: 520px;">The mental edge. How to stay disciplined, manage emotions, and think clearly under pressure.</p>
+      </div>
+      <div class="edu-tabs">
+        <a href="education-beginner.html" class="edu-tab">Beginner</a>
+        <a href="education-strategy.html" class="edu-tab">Strategy</a>
+        <a href="education-breakdowns.html" class="edu-tab">Trade Breakdowns</a>
+        <a href="education-psychology.html" class="edu-tab active">Psychology</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 0 var(--pad) 5rem;">
+  <div style="max-width: 1360px; margin: 0 auto;">
+    <div class="video-grid">
+
+      <a href="https://youtu.be/N9BPmhSFgjg?si=eWMzQ1Jt-IuCarud" target="_blank" rel="noopener" class="video-card">
+        <div class="thumb-wrap">
+          <img src="https://img.youtube.com/vi/N9BPmhSFgjg/hqdefault.jpg" alt="Psychology #1" class="thumb-img" />
+          <div class="thumb-overlay"><div class="play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Psychology</span>
+          <h3 class="card-title">Psychology #1</h3>
+          <p class="card-sub">Watch on YouTube →</p>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/HyGlek-qmYA?si=N3jy_9j2sNSw3U2f" target="_blank" rel="noopener" class="video-card">
+        <div class="thumb-wrap">
+          <img src="https://img.youtube.com/vi/HyGlek-qmYA/hqdefault.jpg" alt="Psychology #2" class="thumb-img" />
+          <div class="thumb-overlay"><div class="play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Psychology</span>
+          <h3 class="card-title">Psychology #2</h3>
+          <p class="card-sub">Watch on YouTube →</p>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/zXZeF1GtkfA?si=1MOM0bXOCJBHliSD" target="_blank" rel="noopener" class="video-card">
+        <div class="thumb-wrap">
+          <img src="https://img.youtube.com/vi/zXZeF1GtkfA/hqdefault.jpg" alt="Psychology #3" class="thumb-img" />
+          <div class="thumb-overlay"><div class="play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Psychology</span>
+          <h3 class="card-title">Psychology #3</h3>
+          <p class="card-sub">Watch on YouTube →</p>
+        </div>
+      </a>
+
+      <a href="https://youtu.be/8HOqAev-gWw?si=oyAz33Akcyr_3LaM" target="_blank" rel="noopener" class="video-card">
+        <div class="thumb-wrap">
+          <img src="https://img.youtube.com/vi/8HOqAev-gWw/hqdefault.jpg" alt="Psychology #4" class="thumb-img" />
+          <div class="thumb-overlay"><div class="play-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Psychology</span>
+          <h3 class="card-title">Psychology #4</h3>
+          <p class="card-sub">Watch on YouTube →</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer style="padding: 2rem var(--pad); border-top: 1px solid rgba(0,0,0,0.08);">
+  <div style="max-width: 1360px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <a href="index.html" class="nav-logo">
+      <img src="brand_assets/Logo.jpg" alt="$NIPER logo" />
+      <span class="nav-logo-text">$NIPER</span>
+    </a>
+    <p style="font-size: 0.78rem; color: var(--grey-light);">© 2026 $NIPER — Matt Loeber</p>
+    <div style="display: flex; gap: 1.5rem;">
+      <a href="https://x.com/matt_loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">X @matt_loeber</a>
+      <a href="https://instagram.com/matt_loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">IG @matt_loeber</a>
+      <a href="https://tiktok.com/@matt.loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">TK @matt.loeber</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

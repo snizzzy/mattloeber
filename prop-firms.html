@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prop Firms — $NIPER</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --grey: #e5e9eb;
+      --black: #000;
+      --white: #fff;
+      --red: #ea4c89;
+      --lightgray: #eff2f3;
+      --grey-light: #787878;
+      --pad: 3.75rem;
+      --radius: 2rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--grey);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.015rem;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ::selection { background: #d0d5d8; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--grey);
+      padding: 1.25rem var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .nav-logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+      color: var(--black);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--black);
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { opacity: 1; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s, box-shadow 0.2s;
+      border: none;
+    }
+    .btn:hover { transform: scale(0.97); }
+    .btn:active { transform: scale(0.94); }
+
+    .btn-dark {
+      background: var(--black);
+      color: var(--white);
+      padding: 0.7rem 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .btn-lg {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 12px;
+      width: 100%;
+    }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--grey-light);
+    }
+    .badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      display: inline-block;
+    }
+
+    .discount-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .code-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      border: none;
+    }
+    .code-pill:hover { transform: scale(0.97); }
+    .code-pill:active { transform: scale(0.94); }
+
+    /* ── Firm cards ── */
+    .firm-card {
+      background: var(--black);
+      border-radius: 1.75rem;
+      overflow: hidden;
+      position: relative;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .firm-card:hover { transform: translateY(-3px); }
+
+    .firm-card-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .firm-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Comparison table ── */
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .compare-table th {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.4);
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .compare-table td {
+      padding: 1.1rem 1.25rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      vertical-align: middle;
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .compare-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .check { color: #4ade80; font-size: 1rem; }
+    .cross { color: rgba(255,255,255,0.25); font-size: 1rem; }
+
+    /* ── Fade-up ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+    .d1 { animation-delay: 0.05s; }
+    .d2 { animation-delay: 0.15s; }
+    .d3 { animation-delay: 0.25s; }
+
+    /* ── Copy toast ── */
+    #copy-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: var(--black);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 999;
+    }
+    #copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 767px) {
+      :root { --pad: 1.25rem; }
+      .firm-card { grid-template-columns: 1fr; }
+      .firm-cta { align-items: flex-start; }
+      .hide-mobile { display: none !important; }
+      .compare-wrap { overflow-x: auto; }
+    }
+
+    /* ── Nav dropdown ── */
+    .nav-dropdown { position: relative; display: flex; align-items: center; }
+    .nav-dropdown-trigger {
+      background: none; border: none; padding: 0;
+      display: flex; align-items: center; gap: 0.3rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--black); opacity: 0.7; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .nav-dropdown:hover .nav-dropdown-trigger { opacity: 1; }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 0.9rem); left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: #fff; border-radius: 14px; padding: 0.4rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.06);
+      min-width: 200px; opacity: 0; pointer-events: none;
+      transition: opacity 0.18s, transform 0.22s cubic-bezier(0.22,1,0.36,1);
+      z-index: 200; border: 1px solid rgba(0,0,0,0.07);
+    }
+    .nav-dropdown-menu::before {
+      content: ''; position: absolute;
+      top: -0.95rem; left: 0; right: 0; height: 0.95rem;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1; pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown-menu a {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.65rem 0.85rem; border-radius: 9px;
+      font-size: 0.85rem; font-weight: 500;
+      color: #000 !important; opacity: 1 !important;
+      transition: background 0.15s;
+    }
+    .nav-dropdown-menu a:hover { background: var(--lightgray); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="brand_assets/Logo.jpg" alt="$NIPER logo" />
+    <span class="nav-logo-text">$NIPER</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#work">Work</a>
+    <a href="index.html#about">About</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger" style="opacity:0.7;">
+        Services
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="https://whop.com/forevertradingcircle/forevertradingcircle/" target="_blank" rel="noopener"><span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;flex-shrink:0;"></span>Live Trading</a>
+        <a href="indicator.html"><span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0;"></span>Indicator</a>
+      </div>
+    </div>
+    <a href="prop-firms.html" class="active">Prop Firms</a>
+    <div class="nav-dropdown">
+      <button class="nav-dropdown-trigger">
+        Education
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="nav-dropdown-menu">
+        <a href="education-beginner.html"><span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;flex-shrink:0;"></span>Beginner</a>
+        <a href="education-strategy.html"><span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0;"></span>Strategy</a>
+        <a href="education-breakdowns.html"><span style="width:7px;height:7px;border-radius:50%;background:#6366f1;display:inline-block;flex-shrink:0;"></span>Trade Breakdowns</a>
+        <a href="education-psychology.html"><span style="width:7px;height:7px;border-radius:50%;background:#ea4c89;display:inline-block;flex-shrink:0;"></span>Psychology</a>
+      </div>
+    </div>
+    <a href="index.html#contact" class="btn btn-dark hide-mobile">Connect →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section style="padding: 5rem var(--pad) 3.5rem;">
+  <div style="max-width: 1360px; margin: 0 auto;">
+
+    <div class="badge fade-up" style="margin-bottom: 1.5rem;">
+      <span class="dot"></span>
+      / Affiliate Partners
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem;" class="fade-up d1">
+      <div>
+        <h1 style="font-size: clamp(2.4rem, 4.2vw, 4.2rem); font-weight: 800; color: var(--black); margin-bottom: 1.25rem;">
+          A look into the prop firms I trade with.
+        </h1>
+        <p style="font-size: 1.05rem; line-height: 1.7; color: var(--grey-light); max-width: 520px;">
+          These are the funded trading programs I personally use and recommend. Use code <strong style="color: var(--black);">SNIPER</strong> at checkout for an exclusive discount.
+        </p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1rem; padding-bottom: 0.5rem;">
+        <!-- Global code banner -->
+        <div style="background: var(--black); border-radius: 1rem; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;">
+          <div>
+            <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.4); margin-bottom: 0.4rem;">Your exclusive discount code</p>
+            <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--white); letter-spacing: 0.04em;">SNIPER</p>
+          </div>
+          <button class="code-pill" style="background: var(--red); color: var(--white);" onclick="copyCode('SNIPER')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Code
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ FIRM CARDS ══════════════════ -->
+<section style="padding: 0 var(--pad) 5rem;">
+  <div style="max-width: 1360px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.25rem;">
+
+    <!-- ── Apex Trader Funding ── -->
+    <div class="firm-card fade-up d1">
+      <!-- Glow -->
+      <div class="firm-card-glow" style="background: radial-gradient(ellipse at 0% 50%, rgba(255,140,0,0.18) 0%, transparent 55%);"></div>
+      <!-- Grain -->
+      <div style="position: absolute; inset: 0; opacity: 0.035; background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\"); background-size: 200px; pointer-events: none;"></div>
+
+      <!-- Left: info -->
+      <div style="position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <!-- Logo mark -->
+          <div style="width: 56px; height: 56px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: #000;">
+            <img src="apex-logo-stack-light-863x1024.webp" alt="Apex Trader Funding" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 0.2rem;">Apex Trader Funding</h2>
+            <p style="font-size: 0.78rem; color: rgba(255,255,255,0.4); font-weight: 500;">apextraderfunding.com</p>
+          </div>
+          <span class="discount-pill" style="background: rgba(255,140,0,0.18); color: #ff8c00; border: 1px solid rgba(255,140,0,0.3);">
+            ✦ Best Value
+          </span>
+        </div>
+
+        <p style="font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 600px; margin-bottom: 1.5rem;">
+          The largest and most trusted funded trading program. Apex offers consistent payouts, flexible rules, and some of the best scaling plans available. A top pick for serious futures traders.
+        </p>
+
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Futures</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Up to $300K</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Daily Payouts</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,140,0,0.12); border-radius: 100px; font-size: 0.72rem; color: #ff8c00; font-weight: 600;">Code: SNIPER</span>
+        </div>
+      </div>
+
+      <!-- Right: CTA -->
+      <div class="firm-cta" style="position: relative; z-index: 1; min-width: 180px;">
+        <a href="https://apextraderfunding.com/member/aff/go/sniperfx" target="_blank" rel="noopener" class="btn btn-lg" style="background: linear-gradient(135deg, #ff8c00, #ff4500); color: #fff; text-align: center;">
+          Get Started →
+        </a>
+        <button class="code-pill" style="background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem;" onclick="copyCode('SNIPER')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy: SNIPER
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Tradeify ── -->
+    <div class="firm-card fade-up d2">
+      <!-- Glow -->
+      <div class="firm-card-glow" style="background: radial-gradient(ellipse at 0% 50%, rgba(99,102,241,0.18) 0%, transparent 55%);"></div>
+      <!-- Grain -->
+      <div style="position: absolute; inset: 0; opacity: 0.035; background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\"); background-size: 200px; pointer-events: none;"></div>
+
+      <div style="position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <div style="width: 56px; height: 56px; border-radius: 10px; overflow: hidden; flex-shrink: 0;">
+            <img src="tradifylogo.png" alt="Tradeify" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 0.2rem;">Tradeify</h2>
+            <p style="font-size: 0.78rem; color: rgba(255,255,255,0.4); font-weight: 500;">tradeify.co</p>
+          </div>
+          <span class="discount-pill" style="background: rgba(99,102,241,0.18); color: #818cf8; border: 1px solid rgba(99,102,241,0.3);">
+            ✦ Fast Payouts
+          </span>
+        </div>
+
+        <p style="font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 600px; margin-bottom: 1.5rem;">
+          Tradeify is built for speed — fast evaluations, rapid withdrawals, and straightforward rules that don't get in the way of trading. Ideal for traders who want to get funded quickly.
+        </p>
+
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Futures</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Fast Evaluation</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Weekly Payouts</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(99,102,241,0.15); border-radius: 100px; font-size: 0.72rem; color: #818cf8; font-weight: 600;">Code: SNIPER</span>
+        </div>
+      </div>
+
+      <div class="firm-cta" style="position: relative; z-index: 1; min-width: 180px;">
+        <a href="https://tradeify.co/?ref=0O68LLES" target="_blank" rel="noopener" class="btn btn-lg" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; text-align: center;">
+          Get Started →
+        </a>
+        <button class="code-pill" style="background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem;" onclick="copyCode('SNIPER')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy: SNIPER
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Lucid Trading ── -->
+    <div class="firm-card fade-up d3">
+      <!-- Glow -->
+      <div class="firm-card-glow" style="background: radial-gradient(ellipse at 0% 50%, rgba(234,76,137,0.2) 0%, transparent 55%);"></div>
+      <!-- Grain -->
+      <div style="position: absolute; inset: 0; opacity: 0.035; background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\"); background-size: 200px; pointer-events: none;"></div>
+
+      <div style="position: relative; z-index: 1;">
+        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;">
+          <div style="width: 56px; height: 56px; border-radius: 10px; overflow: hidden; flex-shrink: 0; background: #000;">
+            <img src="lucid.jpg" alt="Lucid Trading" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--white); margin-bottom: 0.2rem;">Lucid Trading</h2>
+            <p style="font-size: 0.78rem; color: rgba(255,255,255,0.4); font-weight: 500;">lucidtrading.com</p>
+          </div>
+          <span class="discount-pill" style="background: rgba(234,76,137,0.18); color: var(--red); border: 1px solid rgba(234,76,137,0.3);">
+            ✦ Matt's Pick
+          </span>
+        </div>
+
+        <p style="font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 600px; margin-bottom: 1.5rem;">
+          Lucid Trading stands out with clear rules, transparent pricing, and a trader-first approach. An excellent option for those who want a straightforward path to funded capital with no hidden hurdles.
+        </p>
+
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Futures</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Transparent Rules</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(255,255,255,0.07); border-radius: 100px; font-size: 0.72rem; color: rgba(255,255,255,0.5); font-weight: 500;">Funded Fast</span>
+          <span style="padding: 0.35rem 0.85rem; background: rgba(234,76,137,0.12); border-radius: 100px; font-size: 0.72rem; color: var(--red); font-weight: 600;">Code: SNIPER</span>
+        </div>
+      </div>
+
+      <div class="firm-cta" style="position: relative; z-index: 1; min-width: 180px;">
+        <a href="https://lucidtrading.com/ref/SNIPER" target="_blank" rel="noopener" class="btn btn-lg" style="background: linear-gradient(135deg, #ea4c89, #c026d3); color: #fff; text-align: center;">
+          Get Started →
+        </a>
+        <button class="code-pill" style="background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem;" onclick="copyCode('SNIPER')">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          Copy: SNIPER
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════ COMPARISON TABLE ══════════════════ -->
+<section style="padding: 0 var(--pad) 5rem;">
+  <div style="max-width: 1360px; margin: 0 auto;">
+
+    <div class="badge" style="margin-bottom: 1.75rem;">
+      <span class="dot"></span>
+      / Find the best prop account for you
+    </div>
+
+    <div class="compare-wrap" style="background: var(--black); border-radius: 1.75rem; overflow: hidden;">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width: 22%;">Firm</th>
+            <th>Market</th>
+            <th>Max Account</th>
+            <th>Profit Split</th>
+            <th>Payouts</th>
+            <th>Discount Code</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; border-radius: 7px; overflow: hidden; flex-shrink: 0; background: #000;"><img src="apex-logo-stack-light-863x1024.webp" alt="Apex" style="width:100%;height:100%;object-fit:cover;" /></div>
+                <span style="font-weight: 600; color: var(--white);">Apex Trader Funding</span>
+              </div>
+            </td>
+            <td>Futures</td>
+            <td>$300,000</td>
+            <td>90%</td>
+            <td>On Demand</td>
+            <td>
+              <button onclick="copyCode('SNIPER')" style="background: rgba(255,140,0,0.12); color: #ff8c00; border: 1px solid rgba(255,140,0,0.25); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 0.04em; transition: transform 0.2s;" onmouseenter="this.style.transform='scale(0.97)'" onmouseleave="this.style.transform='scale(1)'">SNIPER</button>
+            </td>
+            <td>
+              <a href="https://apextraderfunding.com/member/aff/go/sniperfx" target="_blank" rel="noopener" style="color: rgba(255,255,255,0.5); font-size: 0.8rem; font-weight: 500; white-space: nowrap; transition: color 0.2s;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.5)'">Get Started →</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; border-radius: 7px; overflow: hidden; flex-shrink: 0;"><img src="tradifylogo.png" alt="Tradeify" style="width:100%;height:100%;object-fit:cover;" /></div>
+                <span style="font-weight: 600; color: var(--white);">Tradeify</span>
+              </div>
+            </td>
+            <td>Futures</td>
+            <td>$150,000</td>
+            <td>90%</td>
+            <td>On Demand</td>
+            <td>
+              <button onclick="copyCode('SNIPER')" style="background: rgba(99,102,241,0.12); color: #818cf8; border: 1px solid rgba(99,102,241,0.25); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 0.04em; transition: transform 0.2s;" onmouseenter="this.style.transform='scale(0.97)'" onmouseleave="this.style.transform='scale(1)'">SNIPER</button>
+            </td>
+            <td>
+              <a href="https://tradeify.co/?ref=0O68LLES" target="_blank" rel="noopener" style="color: rgba(255,255,255,0.5); font-size: 0.8rem; font-weight: 500; white-space: nowrap; transition: color 0.2s;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.5)'">Get Started →</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; border-radius: 7px; overflow: hidden; flex-shrink: 0; background: #000;"><img src="lucid.jpg" alt="Lucid" style="width:100%;height:100%;object-fit:cover;" /></div>
+                <span style="font-weight: 600; color: var(--white);">Lucid Trading</span>
+              </div>
+            </td>
+            <td>Futures</td>
+            <td>$150,000</td>
+            <td>90%</td>
+            <td>On Demand</td>
+            <td>
+              <button onclick="copyCode('SNIPER')" style="background: rgba(234,76,137,0.12); color: var(--red); border: 1px solid rgba(234,76,137,0.25); padding: 0.3rem 0.8rem; border-radius: 100px; font-size: 0.72rem; font-weight: 700; cursor: pointer; letter-spacing: 0.04em; transition: transform 0.2s;" onmouseenter="this.style.transform='scale(0.97)'" onmouseleave="this.style.transform='scale(1)'">SNIPER</button>
+            </td>
+            <td>
+              <a href="https://lucidtrading.com/ref/SNIPER" target="_blank" rel="noopener" style="color: rgba(255,255,255,0.5); font-size: 0.8rem; font-weight: 500; white-space: nowrap; transition: color 0.2s;" onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='rgba(255,255,255,0.5)'">Get Started →</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 0.78rem; color: var(--grey-light); margin-top: 1rem; line-height: 1.6;">
+      * Account sizes, profit splits, and payout terms are subject to change. Always verify current terms on each firm's website before purchasing.
+    </p>
+
+  </div>
+</section>
+
+<!-- ══════════════════ DISCLAIMER / FOOTER ══════════════════ -->
+<div style="background: var(--black); border-radius: var(--radius); margin: 0 1rem 1.5rem; padding: 3rem var(--pad);">
+  <div style="max-width: 1360px; margin: 0 auto; display: flex; gap: 3rem; align-items: start; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 260px;">
+      <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; font-weight: 600;">Affiliate Disclosure</p>
+      <p style="font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.4);">
+        The links on this page are affiliate links. If you sign up through them, I may earn a commission at no extra cost to you. I only recommend firms I personally use or have vetted.
+      </p>
+    </div>
+    <div style="flex: 1; min-width: 260px;">
+      <p style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; font-weight: 600;">Risk Disclaimer</p>
+      <p style="font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.4);">
+        Funded trading involves significant risk. Past performance is not indicative of future results. Trade responsibly and never risk more than you can afford to lose.
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer style="padding: 2rem var(--pad) 2rem;">
+  <div style="max-width: 1360px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <a href="index.html" class="nav-logo">
+      <img src="brand_assets/Logo.jpg" alt="$NIPER logo" />
+      <span class="nav-logo-text">$NIPER</span>
+    </a>
+    <p style="font-size: 0.78rem; color: var(--grey-light); margin: 0;">© 2026 $NIPER — Matt Loeber</p>
+    <div style="display: flex; gap: 1.5rem;">
+      <a href="https://x.com/matt_loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">X @matt_loeber</a>
+      <a href="https://instagram.com/matt_loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">IG @matt_loeber</a>
+      <a href="https://tiktok.com/@matt.loeber" target="_blank" rel="noopener" style="font-size: 0.78rem; color: var(--grey-light); font-weight: 500;">TK @matt.loeber</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Copy toast -->
+<div id="copy-toast">Code copied — SNIPER ✓</div>
+
+<script>
+  function copyCode(code) {
+    navigator.clipboard.writeText(code).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+    const toast = document.getElementById('copy-toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+  }
+</script>
+
+</body>
+</html>
