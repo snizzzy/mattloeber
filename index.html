@@ -225,10 +225,56 @@
     /* ── Responsive ── */
     @media (max-width: 767px) {
       :root { --pad: 1.25rem; }
-      .grid-2 { grid-template-columns: 1fr !important; }
-      .grid-3 { grid-template-columns: 1fr !important; }
-      .hero-grid { grid-template-columns: 1fr !important; }
+      .grid-2 { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .grid-3 { grid-template-columns: 1fr !important; gap: 1rem !important; }
+      .hero-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
       .hide-mobile { display: none !important; }
+
+      /* Nav: compact, allow wrapping */
+      nav { padding: 0.9rem var(--pad); flex-wrap: wrap; gap: 0.75rem; }
+      .nav-links { gap: 0.9rem; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .nav-links a, .nav-dropdown-trigger { font-size: 0.82rem; }
+
+      /* Hero */
+      section[style*="padding: 5rem var(--pad) 4rem"] { padding: 2.5rem var(--pad) 2.5rem !important; }
+      .hero-grid { max-width: 100% !important; }
+      .hero-grid h1 { font-size: 2rem !important; line-height: 1.1 !important; }
+
+      /* Hero visual banner: stack vertically, tighter padding */
+      div[style*="border-radius: 1.75rem"][style*="padding: 3.5rem"] {
+        padding: 2rem 1.5rem !important;
+        min-height: 0 !important;
+      }
+      div[style*="border-radius: 1.75rem"][style*="padding: 3.5rem"] > div:last-child {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.25rem !important;
+        text-align: center !important;
+      }
+      div[style*="border-radius: 1.75rem"][style*="padding: 3.5rem"] img {
+        width: 72px !important; height: 72px !important;
+      }
+      div[style*="border-radius: 1.75rem"] p[style*="font-size: 1.8rem"] {
+        font-size: 1.35rem !important;
+      }
+
+      /* Section paddings */
+      section[style*="padding: 6rem"] { padding: 3.5rem var(--pad) !important; }
+      div[style*="padding: 5rem var(--pad)"] { padding: 3.5rem var(--pad) !important; }
+      .section-rounded { margin: 0 0.5rem 1rem !important; border-radius: 1.25rem !important; }
+
+      /* Section headings */
+      h2[style*="clamp(2rem"] { font-size: 1.85rem !important; }
+      h2[style*="clamp(2.2rem"] { font-size: 1.9rem !important; }
+
+      /* Cards: smaller padding, flexible height */
+      .card[style*="padding: 3rem"]   { padding: 1.75rem !important; min-height: 260px !important; }
+      .card[style*="padding: 2.5rem"] { padding: 1.75rem !important; min-height: 0 !important; }
+      .card h3 { font-size: 1.25rem !important; }
+
+      /* Services accordion: reduce indent */
+      details summary > div { gap: 1rem !important; }
+      details > div[style*="padding: 0 0 1.5rem 3.5rem"] { padding: 0 0 1.25rem 1.75rem !important; }
     }
 
     /* ── Nav dropdown ── */
@@ -390,6 +436,7 @@
       <div class="nav-dropdown-menu">
         <a href="https://whop.com/forevertradingcircle/forevertradingcircle/" target="_blank" rel="noopener"><span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;flex-shrink:0;"></span>Live Trading</a>
         <a href="indicator.html"><span style="width:7px;height:7px;border-radius:50%;background:#f59e0b;display:inline-block;flex-shrink:0;"></span>Indicator</a>
+        <a href="https://matt.forevertradinglab.com/vsl-page-page625162" target="_blank" rel="noopener"><span style="width:7px;height:7px;border-radius:50%;background:#8b5cf6;display:inline-block;flex-shrink:0;"></span>Mentorship</a>
       </div>
     </div>
     <a href="prop-firms.html">Prop Firms</a>
