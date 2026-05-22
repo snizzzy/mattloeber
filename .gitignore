@@ -2,3 +2,5 @@
 temporary screenshots/
 .DS_Store
 node_modules/
+
+SESSION_HANDOFF.md
