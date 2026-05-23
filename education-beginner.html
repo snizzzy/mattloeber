@@ -61,6 +61,15 @@
     .card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); letter-spacing: -0.02em; line-height: 1.2; }
     .card-sub { font-size: 0.8rem; color: rgba(255,255,255,0.35); font-weight: 400; }
 
+    /* Coming Soon / Live tags + placeholder thumbs */
+    .video-card.coming-soon { cursor: default; opacity: 0.55; transition: opacity 0.3s ease; }
+    .video-card.coming-soon:hover { transform: none; opacity: 0.75; }
+    .placeholder-thumb { background: radial-gradient(ellipse at 50% 50%, #1a1a1a 0%, #050505 80%); display: flex; align-items: center; justify-content: center; }
+    .placeholder-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(3.5rem, 8vw, 5.5rem); font-weight: 800; color: var(--red); letter-spacing: -0.05em; opacity: 0.9; text-shadow: 0 0 40px rgba(234,76,137,0.25); }
+    .status-tag { position: absolute; top: 0.85rem; right: 0.85rem; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 0.32rem 0.65rem; border-radius: 100px; z-index: 2; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .tag-soon { background: rgba(234,76,137,0.16); color: var(--red); border: 1px solid rgba(234,76,137,0.32); }
+    .tag-live { background: rgba(16,185,129,0.2); color: var(--accent); border: 1px solid rgba(16,185,129,0.4); }
+
     /* Subnav tabs */
     .edu-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .edu-tab { padding: 0.55rem 1.1rem; border-radius: 100px; font-size: 0.82rem; font-weight: 600; border: 1px solid rgba(0,0,0,0.12); color: var(--grey-light); transition: background 0.2s, color 0.2s, border-color 0.2s; }
@@ -117,12 +126,12 @@
   <div style="max-width: 1360px; margin: 0 auto;">
     <div class="badge" style="margin-bottom: 1.25rem;">
       <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
-      / Education
+      / Education — Beginner
     </div>
     <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
       <div>
-        <h1 style="font-size: clamp(2.2rem, 3.8vw, 3.5rem); font-weight: 800; color: var(--black); margin-bottom: 0.75rem;">Beginner</h1>
-        <p style="font-size: 1rem; line-height: 1.7; color: var(--grey-light); max-width: 520px;">Core concepts every trader needs to master before putting real money on the line.</p>
+        <h1 style="font-size: clamp(2.2rem, 3.8vw, 3.5rem); font-weight: 800; color: var(--black); margin-bottom: 0.75rem;">Start Here</h1>
+        <p style="font-size: 1rem; line-height: 1.7; color: var(--grey-light); max-width: 640px;">If you've never traded futures, never heard of ICT, or you've spent two years stacking indicators and still can't read a chart — this is the page for you. The Forever Model isn't beginner-friendly by accident. It's beginner-friendly because the framework is the same whether you're trading a $50 sim or a funded account. Start at the top. Work down. No shortcuts.</p>
       </div>
       <!-- Sub-nav tabs -->
       <div class="edu-tabs">
@@ -140,42 +149,27 @@
   <div style="max-width: 1360px; margin: 0 auto;">
     <div class="video-grid">
 
-      <!-- Liquidity -->
-      <a href="https://youtu.be/lDlpcmNZxQc?si=2D8t7XTg8WKOfD2E" target="_blank" rel="noopener" class="video-card">
+      <!-- 01 — LIVE: Liquidity -->
+      <a href="https://youtu.be/lDlpcmNZxQc" target="_blank" rel="noopener" class="video-card">
         <div class="thumb-wrap">
-          <img src="https://img.youtube.com/vi/lDlpcmNZxQc/hqdefault.jpg" alt="Liquidity" class="thumb-img" />
+          <img src="https://img.youtube.com/vi/lDlpcmNZxQc/hqdefault.jpg" alt="The Only Liquidity Trading Video You'll Ever Need" class="thumb-img" />
           <div class="thumb-overlay">
             <div class="play-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
           </div>
+          <span class="status-tag tag-live">Watch Now</span>
         </div>
         <div class="card-body">
-          <span class="cat-pill">Beginner</span>
-          <h3 class="card-title">Liquidity</h3>
-          <p class="card-sub">Watch on YouTube →</p>
+          <span class="cat-pill">Module 01</span>
+          <h3 class="card-title">The Only Liquidity Trading Video You'll Ever Need</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The single most important concept in this style of trading. What liquidity is, where it sits on the chart, and why price hunts it before every real move. Internal range, external range, sellside, buyside — explained plainly enough for a beginner, deep enough that a funded trader still gets something.</p>
+          <p class="card-sub" style="margin-top: auto; padding-top: 0.4rem;">Watch on YouTube →</p>
         </div>
       </a>
 
-      <!-- Risk Management -->
-      <a href="https://youtu.be/sPf0mBu5Bxs?si=STs-08qtIM7UhT2S" target="_blank" rel="noopener" class="video-card">
-        <div class="thumb-wrap">
-          <img src="https://img.youtube.com/vi/sPf0mBu5Bxs/hqdefault.jpg" alt="Risk Management" class="thumb-img" />
-          <div class="thumb-overlay">
-            <div class="play-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <span class="cat-pill">Beginner</span>
-          <h3 class="card-title">Risk Management</h3>
-          <p class="card-sub">Watch on YouTube →</p>
-        </div>
-      </a>
-
-      <!-- SMT Divergence -->
-      <a href="https://youtu.be/sjLUXJLvams?si=8rp4cnVfJCK7eLn8" target="_blank" rel="noopener" class="video-card">
+      <!-- 02 — LIVE: SMT Divergence -->
+      <a href="https://youtu.be/sjLUXJLvams" target="_blank" rel="noopener" class="video-card">
         <div class="thumb-wrap">
           <img src="https://img.youtube.com/vi/sjLUXJLvams/hqdefault.jpg" alt="SMT Divergence" class="thumb-img" />
           <div class="thumb-overlay">
@@ -183,31 +177,123 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
           </div>
+          <span class="status-tag tag-live">Watch Now</span>
         </div>
         <div class="card-body">
-          <span class="cat-pill">Beginner</span>
+          <span class="cat-pill">Module 02</span>
           <h3 class="card-title">SMT Divergence</h3>
-          <p class="card-sub">Watch on YouTube →</p>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The foundation behind Pillar 03 of the Forever Model. SMT on correlated pairs (ES/NQ, ES/YM) is the cleanest tell of real market intent — it shows you which side is loading before price commits. Watch this right after Module 01 and the liquidity read lands a level deeper.</p>
+          <p class="card-sub" style="margin-top: auto; padding-top: 0.4rem;">Watch on YouTube →</p>
         </div>
       </a>
 
-      <!-- Math behind profitability -->
-      <a href="https://youtu.be/zRwxYzsyvLs?si=GMJ2Vsc5YRTCyLfg" target="_blank" rel="noopener" class="video-card">
+      <!-- 03 — LIVE: Risk Management -->
+      <a href="https://youtu.be/sPf0mBu5Bxs" target="_blank" rel="noopener" class="video-card">
         <div class="thumb-wrap">
-          <img src="https://img.youtube.com/vi/zRwxYzsyvLs/hqdefault.jpg" alt="Math behind profitability" class="thumb-img" />
+          <img src="https://img.youtube.com/vi/sPf0mBu5Bxs/hqdefault.jpg" alt="The Only Risk Management Strategy You Need" class="thumb-img" />
           <div class="thumb-overlay">
             <div class="play-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </div>
           </div>
+          <span class="status-tag tag-live">Watch Now</span>
         </div>
         <div class="card-body">
-          <span class="cat-pill">Beginner</span>
-          <h3 class="card-title">Math Behind Profitability</h3>
-          <p class="card-sub">Watch on YouTube →</p>
+          <span class="cat-pill">Module 03</span>
+          <h3 class="card-title">The Only Risk Management Strategy You Need</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The math of position sizing, the psychology of stops, and the rule that separates traders who survive from traders who don't. The single video that does more for a beginner's longevity than any setup or signal ever will. Watch this before you take a live trade.</p>
+          <p class="card-sub" style="margin-top: auto; padding-top: 0.4rem;">Watch on YouTube →</p>
         </div>
       </a>
 
+      <!-- 04 — LIVE: Math Behind Profitability -->
+      <a href="https://youtu.be/zRwxYzsyvLs" target="_blank" rel="noopener" class="video-card">
+        <div class="thumb-wrap">
+          <img src="https://img.youtube.com/vi/zRwxYzsyvLs/hqdefault.jpg" alt="Math Behind Profitability" class="thumb-img" />
+          <div class="thumb-overlay">
+            <div class="play-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+          </div>
+          <span class="status-tag tag-live">Watch Now</span>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Module 04</span>
+          <h3 class="card-title">Math Behind Profitability</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The numbers under Module 03. Win rate alone doesn't pay — expectancy, R-multiples, and position sizing do. This breakdown explains why a 40% strategy can outperform a 70% strategy, and why the math is what keeps a trader in the seat long enough for the model to work.</p>
+          <p class="card-sub" style="margin-top: auto; padding-top: 0.4rem;">Watch on YouTube →</p>
+        </div>
+      </a>
+
+      <!-- 05 — Coming Soon -->
+      <div class="video-card coming-soon">
+        <div class="thumb-wrap placeholder-thumb">
+          <span class="placeholder-num">05</span>
+          <span class="status-tag tag-soon">Coming Soon</span>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Module 05</span>
+          <h3 class="card-title">What Futures Actually Are</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The basics most beginner content skips. What a futures contract is, what NQ and ES actually represent, why prop firms exist, and what "tick" means in dollars. The vocabulary you need before any strategy makes sense.</p>
+        </div>
+      </div>
+
+      <!-- 06 — Coming Soon -->
+      <div class="video-card coming-soon">
+        <div class="thumb-wrap placeholder-thumb">
+          <span class="placeholder-num">06</span>
+          <span class="status-tag tag-soon">Coming Soon</span>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Module 06</span>
+          <h3 class="card-title">Reading a Chart Without Indicators</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">Candles, timeframes, sessions, killzones. How to look at a chart and see price action — not a screen full of RSI and moving averages. The mental shift that has to happen before the Forever Model clicks.</p>
+        </div>
+      </div>
+
+      <!-- 07 — Coming Soon -->
+      <div class="video-card coming-soon">
+        <div class="thumb-wrap placeholder-thumb">
+          <span class="placeholder-num">07</span>
+          <span class="status-tag tag-soon">Coming Soon</span>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Module 07</span>
+          <h3 class="card-title">Quarterly Theory in Plain English</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">The four phases of every market cycle — accumulation, manipulation, distribution, reversal. How they show up on the yearly chart and on the 1-minute chart for the exact same reason.</p>
+        </div>
+      </div>
+
+      <!-- 08 — Coming Soon -->
+      <div class="video-card coming-soon">
+        <div class="thumb-wrap placeholder-thumb">
+          <span class="placeholder-num">08</span>
+          <span class="status-tag tag-soon">Coming Soon</span>
+        </div>
+        <div class="card-body">
+          <span class="cat-pill">Module 08</span>
+          <h3 class="card-title">Your First 30 Days</h3>
+          <p style="font-size: 0.85rem; line-height: 1.65; color: rgba(255,255,255,0.5); margin: 0;">A simple action plan — what to watch, what to journal, what to backtest, and what not to do. Built so a beginner can spend their first month getting reps without losing money.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CTA ══════════════════ -->
+<section style="padding: 0 var(--pad) 5rem;">
+  <div style="max-width: 1360px; margin: 0 auto;">
+    <div style="background: var(--black); border-radius: 1.75rem; padding: clamp(2.25rem, 5vw, 3.75rem); text-align: center; position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(16,185,129,0.18) 0%, transparent 60%);"></div>
+      <div style="position: relative; z-index: 1; max-width: 600px; margin: 0 auto;">
+        <h3 style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 0.85rem;">Ready for the next step?</h3>
+        <p style="font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.55); margin-bottom: 2rem;">Once the foundations click, the Strategy and Trade Breakdowns pages put the model into motion. The free Discord is where it gets reinforced daily.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; justify-content: center;">
+          <a href="education-strategy.html" style="background:#fff; color:#000; padding:0.9rem 2rem; border-radius:100px; font-size:0.9rem; font-weight:600; display:inline-flex; align-items:center; gap:0.4rem; transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);" onmouseenter="this.style.transform='scale(0.97)'" onmouseleave="this.style.transform='scale(1)'">See the Strategy →</a>
+          <a href="https://discord.gg/P8UG7Rat7M" target="_blank" rel="noopener" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.3); padding:0.9rem 2rem; border-radius:100px; font-size:0.9rem; font-weight:600; display:inline-flex; align-items:center; gap:0.4rem; transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s;" onmouseenter="this.style.transform='scale(0.97)'; this.style.borderColor='rgba(255,255,255,0.6)'" onmouseleave="this.style.transform='scale(1)'; this.style.borderColor='rgba(255,255,255,0.3)'">Join the Free Discord →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
