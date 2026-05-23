@@ -281,14 +281,38 @@
       section[style*="padding: 0 var(--pad) 5rem"] { padding: 0 var(--pad) 3.5rem !important; }
       h1 { font-size: 1.95rem !important; line-height: 1.15 !important; }
 
+      /* Hero 2-col grid: collapse to single column on mobile */
+      div[style*="grid-template-columns: 1fr 1fr"][style*="gap: 4rem"] {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        margin-bottom: 2rem !important;
+      }
+
+      /* SNIPER code banner in hero: stack vertically */
+      div[style*="border-radius: 1rem"][style*="padding: 1.5rem 2rem"] {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 1rem !important;
+        padding: 1.25rem 1.5rem !important;
+        text-align: left;
+      }
+      div[style*="border-radius: 1rem"][style*="padding: 1.5rem 2rem"] p[style*="font-size: 1.8rem"] {
+        font-size: 1.5rem !important;
+      }
+      div[style*="border-radius: 1rem"][style*="padding: 1.5rem 2rem"] .code-pill {
+        width: 100%;
+        justify-content: center;
+      }
+
       /* Firm cards: stack vertically, tighter padding */
       .firm-card { grid-template-columns: 1fr; padding: 1.75rem 1.5rem; gap: 1.5rem; }
-      .firm-cta { align-items: flex-start; }
-      .firm-cta a, .firm-cta .code-pill { width: 100%; }
+      .firm-cta { align-items: flex-start; min-width: 0 !important; }
+      .firm-cta a, .firm-cta .code-pill { width: 100%; justify-content: center; }
+      .firm-card h2 { font-size: 1.25rem !important; }
 
       /* Comparison table: horizontal scroll */
-      .compare-wrap { overflow-x: auto; }
-      .compare-table th, .compare-table td { padding: 0.75rem 0.9rem; font-size: 0.82rem; white-space: nowrap; }
+      .compare-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .compare-table th, .compare-table td { padding: 0.7rem 0.85rem; font-size: 0.8rem; white-space: nowrap; }
     }
 
     /* ── Nav dropdown ── */
