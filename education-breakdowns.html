@@ -64,8 +64,26 @@
 
     @media (max-width: 767px) {
       :root { --pad: 1.25rem; }
-      .video-grid { grid-template-columns: 1fr; }
       .hide-mobile { display: none !important; }
+      .video-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+      /* Nav: wrap onto two rows, compact */
+      nav { padding: 0.85rem var(--pad); flex-wrap: wrap; gap: 0.6rem; }
+      .nav-links { gap: 0.85rem; row-gap: 0.4rem; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .nav-links > a, .nav-dropdown-trigger { font-size: 0.82rem; }
+      .nav-dropdown-menu { min-width: 180px; }
+
+      /* Hero: tighter padding + smaller H1 */
+      section[style*="padding: 4.5rem"] { padding: 2.25rem var(--pad) 1.5rem !important; }
+      h1 { font-size: 1.9rem !important; line-height: 1.15 !important; }
+
+      /* Edu-tabs: compact */
+      .edu-tabs { gap: 0.4rem; }
+      .edu-tab { padding: 0.5rem 0.85rem; font-size: 0.76rem; }
+
+      /* Card titles fit narrow column */
+      .card-title { font-size: 1.02rem !important; }
+      .card-body { padding: 1.2rem 1.4rem 1.4rem; }
     }
   </style>
 </head>

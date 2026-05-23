@@ -271,10 +271,18 @@
       .card[style*="padding: 3rem"]   { padding: 1.75rem !important; min-height: 260px !important; }
       .card[style*="padding: 2.5rem"] { padding: 1.75rem !important; min-height: 0 !important; }
       .card h3 { font-size: 1.25rem !important; }
+      /* Preserve big Testimonials rating number (4.9 / 5) */
+      h3[style*="clamp(3.5rem"] { font-size: 3rem !important; }
+
+      /* Testimonials cards: tighter padding when stacked */
+      .card[style*="padding: 3rem"] p[style*="font-size: 1.15rem"] { font-size: 1rem !important; }
 
       /* Services accordion: reduce indent */
       details summary > div { gap: 1rem !important; }
       details > div[style*="padding: 0 0 1.5rem 3.5rem"] { padding: 0 0 1.25rem 1.75rem !important; }
+
+      /* CTA dual-button containers: tighter gap */
+      div[style*="display: flex"][style*="gap: 0.75rem"][style*="flex-wrap: wrap"] { gap: 0.6rem !important; }
     }
 
     /* ── Nav dropdown ── */

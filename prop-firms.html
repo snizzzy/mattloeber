@@ -268,10 +268,27 @@
     /* ── Responsive ── */
     @media (max-width: 767px) {
       :root { --pad: 1.25rem; }
-      .firm-card { grid-template-columns: 1fr; }
-      .firm-cta { align-items: flex-start; }
       .hide-mobile { display: none !important; }
+
+      /* Nav: wrap onto two rows, compact */
+      nav { padding: 0.85rem var(--pad); flex-wrap: wrap; gap: 0.6rem; }
+      .nav-links { gap: 0.85rem; row-gap: 0.4rem; flex-wrap: wrap; justify-content: center; width: 100%; }
+      .nav-links > a, .nav-dropdown-trigger { font-size: 0.82rem; }
+      .nav-dropdown-menu { min-width: 180px; }
+
+      /* Hero: tighter padding */
+      section[style*="padding: 5rem var(--pad) 3.5rem"] { padding: 2.5rem var(--pad) 1.75rem !important; }
+      section[style*="padding: 0 var(--pad) 5rem"] { padding: 0 var(--pad) 3.5rem !important; }
+      h1 { font-size: 1.95rem !important; line-height: 1.15 !important; }
+
+      /* Firm cards: stack vertically, tighter padding */
+      .firm-card { grid-template-columns: 1fr; padding: 1.75rem 1.5rem; gap: 1.5rem; }
+      .firm-cta { align-items: flex-start; }
+      .firm-cta a, .firm-cta .code-pill { width: 100%; }
+
+      /* Comparison table: horizontal scroll */
       .compare-wrap { overflow-x: auto; }
+      .compare-table th, .compare-table td { padding: 0.75rem 0.9rem; font-size: 0.82rem; white-space: nowrap; }
     }
 
     /* ── Nav dropdown ── */
